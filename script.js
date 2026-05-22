@@ -81,6 +81,16 @@ window.onload = function () {
   await wait(1500);
 
   await type("WARNING: This file has been redacted from Level-3 to Level-1. Expect moderate redactations.");
+         
+  await type("Dr. ███████, Research Director of Facility-220");
+  await wait(2000);
+      
+  await type("Full Name: ██████ ███████");
+  await wait(2000);
+  
+  await type("Height: 179cm | Weight: 82kg");
+  await wait(2000);
+
 }
 
         else if (value === "12357") {
