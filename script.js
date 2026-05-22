@@ -5,6 +5,8 @@ window.onload = function () {
 
   const SECRET = "load personnel database";
 
+  let mode = "high command";
+
   function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -33,15 +35,14 @@ window.onload = function () {
     output.appendChild(line);
   }
 
-
   async function boot() {
     await type("TERMINAL ACTIVATING...");
-    await wait(1000);
+    await wait(2000);
 
-    await type("SYSTEM ACTIVATION IMMINENT...");
-    await wait(5000);
+    await type("SYSTEM UPDATING...");
+    await wait(6000);
 
-    await type("SYSTEM ENABLED");
+    await type("TERMINAL ACTIVE");
   }
 
   boot();
@@ -53,15 +54,39 @@ window.onload = function () {
 
       print("> " + value);
 
-      if (value === SECRET) {
-        await type("ACCESS GRANTED");
-        await wait(1000);
+      if (mode === "high command" && value === SECRET) {
 
-        await type("LOADING PERSONNEL DATABASE");
-        await wait(5000);
+        await type("COMMAND PROCESSING");
+        await wait(2000);
 
-        await type("test");
-      } else {
+        await type("LOADING PERSONNEL DATABASE...");
+        await wait(3500);
+
+        await type("DATABASE READY");
+
+        mode = "unlocked";
+      }
+
+      else if (mode === "unlocked") {
+
+        if (value === "68335") {
+          await type("kfz");
+        }
+
+        else if (value === "12357") {
+          await type("junkbot");
+        }
+
+        else if (value === "672") {
+          await type("[REDACTED]");
+        }
+
+        else {
+          await type("INVALID FILE ID");
+        }
+      }
+
+      else {
         await type("INVALID COMMAND");
       }
 
