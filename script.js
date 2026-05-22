@@ -3,14 +3,12 @@ window.onload = function () {
   const input = document.getElementById("input");
   const output = document.getElementById("output");
 
-  const SECRET = "database access dossier 68235";
+  const SECRET = "load personnel database";
 
-  // ⏱ WAIT FUNCTION (this is what you wanted)
   function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // ✍️ typing effect
   function type(text) {
     return new Promise(resolve => {
       const line = document.createElement("div");
@@ -35,15 +33,15 @@ window.onload = function () {
     output.appendChild(line);
   }
 
-  // 🚀 START SEQUENCE (NOW WITH REAL WAITS)
+
   async function boot() {
-    await type("TERMINAL BOOTING...");
-    await wait(2000);
+    await type("TERMINAL ACTIVATING...");
+    await wait(1000);
 
-    await type("CONNECTING TO SYSTEM...");
-    await wait(2000);
+    await type("SYSTEM ACTIVATION IMMINENT...");
+    await wait(5000);
 
-    await type("ACCESS REQUIRED");
+    await type("SYSTEM ENABLED, WELCOME AGENT ██████");
   }
 
   boot();
@@ -57,14 +55,14 @@ window.onload = function () {
 
       if (value === SECRET) {
         await type("ACCESS GRANTED");
-        await wait(2000);
+        await wait(1000);
 
-        await type("LOADING DOSSIER 68235...");
-        await wait(2000);
+        await type("LOADING PERSONNEL DATABASE");
+        await wait(5000);
 
-        await type("████████████████████");
+        await type("test");
       } else {
-        await type("ACCESS DENIED");
+        await type("INVALID COMMAND");
       }
 
       input.value = "";
