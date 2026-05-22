@@ -1,19 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Terminal Access</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+window.onload = function () {
 
-  <div id="output"></div>
+  const input = document.getElementById("input");
+  const output = document.getElementById("output");
 
-  <div class="input-line">
-    <span>&gt;</span>
-    <input id="input" autocomplete="off" autofocus />
-  </div>
+  const SECRET = "database access dossier 68235";
 
-  <script src="script.js"></script>
-</body>
-</html>
+  function typeText(text, speed = 25) {
+    let i = 0;
+
+    const line = document.createElement("div");
+    output.appendChild(line);
+
+    const interval = setInterval(() => {
+      line.innerHTML += text[i];
+      i++;
+
+      if (i >= text.length) {
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+
+  function instant(text) {
+    output.innerHTML += text + "\n";
+  }
+
+  // startup text
+  typeText("TERMINAL ONLINE", 30);
+  typeText("ENTER COMMAND", 30);
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+
+      const value = input.value.trim().toLowerCase();
+
+      instant("> " + value);
+
+      if (value === SECRET) {
+        typeText("ACCESS GRANTED", 40);
+        typeText("LOADING DOSSIER 68235...", 40);
+        typeText("████████████████████", 40);
+      } else {
+        typeText("ACCESS DENIED", 40);
+      }
+
+      input.value = "";
+    }
+  });
+
+};
