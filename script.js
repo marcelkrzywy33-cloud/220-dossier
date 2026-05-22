@@ -5,63 +5,51 @@ window.onload = function () {
 
   const SECRET = "database access dossier 68235";
 
-  let queue = [];
-  let running = false;
+  function type(text, delay = 0) {
+    setTimeout(() => {
+      const line = document.createElement("div");
 
-  function runQueue() {
-    if (running || queue.length === 0) return;
+      let i = 0;
+      const interval = setInterval(() => {
+        line.textContent += text[i];
+        i++;
 
-    running = true;
-    const text = queue.shift();
+        if (i >= text.length) {
+          clearInterval(interval);
+        }
+      }, 20);
 
-    const line = document.createElement("div");
-    output.appendChild(line);
+      output.appendChild(line);
 
-    let i = 0;
-
-    const interval = setInterval(() => {
-      line.innerHTML += text[i];
-      i++;
-
-      if (i >= text.length) {
-        clearInterval(interval);
-
-        setTimeout(() => {
-          running = false;
-          runQueue();
-        }, 300);
-      }
-    }, 25);
+    }, delay);
   }
 
-  function type(text) {
-    queue.push(text);
-    runQueue();
+  function print(text, delay = 0) {
+    setTimeout(() => {
+      const line = document.createElement("div");
+      line.textContent = text;
+      output.appendChild(line);
+    }, delay);
   }
 
-  function instant(text) {
-    const line = document.createElement("div");
-    line.innerHTML = text;
-    output.appendChild(line);
-  }
-
-  // IMPORTANT: use QUEUE (not instant)
-  type("TERMINAL ONLINE");
-  type("ENTER COMMAND");
+  // 🧠 STARTUP SEQUENCE (THIS is where timing matters)
+  type("TERMINAL BOOTING...", 0);
+  type("CONNECTING TO SYSTEM...", 1200);
+  type("ACCESS REQUIRED", 2400);
 
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
 
       const value = input.value.trim().toLowerCase();
 
-      instant("> " + value);
+      print("> " + value);
 
       if (value === SECRET) {
-        type("ACCESS GRANTED");
-        type("LOADING DOSSIER 68235...");
-        type("████████████████████");
+        type("ACCESS GRANTED", 500);
+        type("LOADING DOSSIER 68235...", 1500);
+        type("████████████████████", 2500);
       } else {
-        type("ACCESS DENIED");
+        type("ACCESS DENIED", 500);
       }
 
       input.value = "";
