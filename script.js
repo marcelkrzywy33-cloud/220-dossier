@@ -5,7 +5,6 @@ window.onload = function () {
 
   const SECRET = "database access dossier 68235";
 
-  // MESSAGE QUEUE SYSTEM
   let queue = [];
   let running = false;
 
@@ -13,29 +12,30 @@ window.onload = function () {
     if (running || queue.length === 0) return;
 
     running = true;
-    const item = queue.shift();
+    const text = queue.shift();
 
-    let i = 0;
     const line = document.createElement("div");
     output.appendChild(line);
 
+    let i = 0;
+
     const interval = setInterval(() => {
-      line.innerHTML += item.text[i];
+      line.innerHTML += text[i];
       i++;
 
-      if (i >= item.text.length) {
+      if (i >= text.length) {
         clearInterval(interval);
 
         setTimeout(() => {
           running = false;
           runQueue();
-        }, item.delay || 300);
+        }, 300);
       }
-    }, item.speed || 20);
+    }, 25);
   }
 
-  function type(text, speed = 20, delay = 300) {
-    queue.push({ text, speed, delay });
+  function type(text) {
+    queue.push(text);
     runQueue();
   }
 
@@ -45,9 +45,9 @@ window.onload = function () {
     output.appendChild(line);
   }
 
-  // STARTUP (now queued properly)
-  type("TERMINAL ONLINE", 30);
-  type("ENTER COMMAND", 30);
+  // IMPORTANT: use QUEUE (not instant)
+  type("TERMINAL ONLINE");
+  type("ENTER COMMAND");
 
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
@@ -57,11 +57,11 @@ window.onload = function () {
       instant("> " + value);
 
       if (value === SECRET) {
-        type("ACCESS GRANTED", 40);
-        type("LOADING DOSSIER 68235...", 40);
-        type("████████████████████", 40);
+        type("ACCESS GRANTED");
+        type("LOADING DOSSIER 68235...");
+        type("████████████████████");
       } else {
-        type("ACCESS DENIED", 40);
+        type("ACCESS DENIED");
       }
 
       input.value = "";
