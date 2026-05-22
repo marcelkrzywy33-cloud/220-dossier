@@ -41,7 +41,7 @@ window.onload = function () {
     await type("SYSTEM ACTIVATION IMMINENT...");
     await wait(5000);
 
-    await type("SYSTEM ENABLED, WELCOME AGENT ██████");
+    await type("SYSTEM ENABLED");
   }
 
   boot();
