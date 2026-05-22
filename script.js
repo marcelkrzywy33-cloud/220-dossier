@@ -69,9 +69,19 @@ window.onload = function () {
 
       else if (mode === "unlocked") {
 
-        if (value === "68335") {
-          await type("kfz");
-        }
+       if (value === "68335") {
+
+  await type("ACCESSING FILE 68335...");
+  await wait(5500);
+
+  await type("Decrypting file...");
+  await wait(10000);
+
+  await type("Personnel Dossier 68335, Dr. ███████");
+  await wait(1500);
+
+  await type("WARNING: This file has been redacted from Level-3 to Level-1. Expect moderate redactations.");
+}
 
         else if (value === "12357") {
           await type("junkbot");
