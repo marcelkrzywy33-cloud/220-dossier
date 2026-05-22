@@ -5,9 +5,16 @@ window.onload = function () {
 
   const SECRET = "database access dossier 68235";
 
-  function type(text, delay = 0) {
-    setTimeout(() => {
+  // ⏱ WAIT FUNCTION (this is what you wanted)
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // ✍️ typing effect
+  function type(text) {
+    return new Promise(resolve => {
       const line = document.createElement("div");
+      output.appendChild(line);
 
       let i = 0;
       const interval = setInterval(() => {
@@ -16,28 +23,32 @@ window.onload = function () {
 
         if (i >= text.length) {
           clearInterval(interval);
+          resolve();
         }
       }, 20);
-
-      output.appendChild(line);
-
-    }, delay);
+    });
   }
 
-  function print(text, delay = 0) {
-    setTimeout(() => {
-      const line = document.createElement("div");
-      line.textContent = text;
-      output.appendChild(line);
-    }, delay);
+  function print(text) {
+    const line = document.createElement("div");
+    line.textContent = text;
+    output.appendChild(line);
   }
 
-  // 🧠 STARTUP SEQUENCE (THIS is where timing matters)
-  type("TERMINAL BOOTING...", 0);
-  type("CONNECTING TO SYSTEM...", 1200);
-  type("ACCESS REQUIRED", 2400);
+  // 🚀 START SEQUENCE (NOW WITH REAL WAITS)
+  async function boot() {
+    await type("TERMINAL BOOTING...");
+    await wait(2000);
 
-  input.addEventListener("keydown", function (e) {
+    await type("CONNECTING TO SYSTEM...");
+    await wait(2000);
+
+    await type("ACCESS REQUIRED");
+  }
+
+  boot();
+
+  input.addEventListener("keydown", async function (e) {
     if (e.key === "Enter") {
 
       const value = input.value.trim().toLowerCase();
@@ -45,11 +56,15 @@ window.onload = function () {
       print("> " + value);
 
       if (value === SECRET) {
-        type("ACCESS GRANTED", 500);
-        type("LOADING DOSSIER 68235...", 1500);
-        type("████████████████████", 2500);
+        await type("ACCESS GRANTED");
+        await wait(2000);
+
+        await type("LOADING DOSSIER 68235...");
+        await wait(2000);
+
+        await type("████████████████████");
       } else {
-        type("ACCESS DENIED", 500);
+        await type("ACCESS DENIED");
       }
 
       input.value = "";
