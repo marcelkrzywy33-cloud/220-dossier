@@ -2,10 +2,10 @@ window.onload = function () {
 
   const input = document.getElementById("input");
   const output = document.getElementById("output");
+  const inputLine = document.querySelector(".input-line");
 
   input.disabled = true;
-
-  document.querySelector(".input-line").style.visibility = "hidden";
+  inputLine.style.display = "none";
 
   const SECRET = "load personnel database";
 
@@ -17,14 +17,11 @@ window.onload = function () {
 
   function type(text) {
     return new Promise(resolve => {
-
       const line = document.createElement("div");
       output.appendChild(line);
 
       let i = 0;
-
       const interval = setInterval(() => {
-
         line.textContent += text[i];
         i++;
 
@@ -32,37 +29,14 @@ window.onload = function () {
           clearInterval(interval);
           resolve();
         }
-
       }, 20);
-
     });
   }
 
   function print(text) {
-
     const line = document.createElement("div");
     line.textContent = text;
     output.appendChild(line);
-
-  }
-
-  async function activatePrompt() {
-
-    const line = document.querySelector(".input-line");
-
-    line.style.visibility = "visible";
-
-    for (let i = 0; i < 6; i++) {
-
-      line.style.opacity = "0";
-      await wait(120);
-
-      line.style.opacity = "1";
-      await wait(120);
-    }
-
-    input.disabled = false;
-    input.focus();
   }
 
   async function boot() {
@@ -74,9 +48,11 @@ window.onload = function () {
     await wait(6000);
 
     await type("TERMINAL ACTIVE");
-    await wait(1000);
+    await wait(500);
 
-    await activatePrompt();
+    inputLine.style.display = "flex";
+    input.disabled = false;
+    input.focus();
   }
 
   boot();
@@ -116,7 +92,7 @@ window.onload = function () {
           await wait(1500);
 
           await type("WARNING: This file has been redacted from Level-3 to Level-1. Expect moderate redactations.");
-          await wait(3000);
+          await wait(2000);
 
           await type("Dr. ███████, Research Director of Facility-220");
           await wait(2000);
@@ -126,32 +102,23 @@ window.onload = function () {
 
           await type("Height: 179cm | Weight: 82kg");
           await wait(2000);
-
         }
 
         else if (value === "12357") {
-
           await type("junkbot");
-
         }
 
         else if (value === "672") {
-
           await type("[REDACTED]");
-
         }
 
         else {
-
           await type("INVALID FILE ID");
-
         }
       }
 
       else {
-
         await type("INVALID COMMAND");
-
       }
 
       input.value = "";
