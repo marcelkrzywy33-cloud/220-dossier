@@ -21,6 +21,7 @@ window.onload = function () {
       output.appendChild(line);
 
       let i = 0;
+
       const interval = setInterval(() => {
         line.textContent += text[i];
         i++;
@@ -59,70 +60,61 @@ window.onload = function () {
 
   input.addEventListener("keydown", async function (e) {
 
-    if (e.key === "Enter") {
+    if (e.key !== "Enter") return;
 
-      const value = input.value.trim().toLowerCase();
+    const value = input.value.trim().toLowerCase();
 
-      print("> " + value);
+    print("> " + value);
 
-      input.value = "";
+    input.value = "";
 
-      if (mode === "high command" && value === SECRET) {
+    if (mode === "high command" && value === SECRET) {
 
-        await type("COMMAND PROCESSING");
+      await type("COMMAND PROCESSING");
+      await wait(2000);
+
+      await type("LOADING PERSONNEL DATABASE...");
+      await wait(3500);
+
+      await type("DATABASE READY");
+
+      mode = "unlocked";
+      return;
+    }
+
+    if (mode === "unlocked") {
+
+      if (value === "68335") {
+
+        await type("ACCESSING FILE 68335...");
+        await wait(1500);
+
+        await type("Decrypting file...");
         await wait(2000);
 
-        await type("LOADING PERSONNEL DATABASE...");
-        await wait(3500);
+        await type("Personnel Dossier 68335, Dr. ███████");
+        await wait(1500);
 
-        await type("DATABASE READY");
+        await type("WARNING: REDACTED FILE");
 
-        mode = "unlocked";
       }
 
-      else if (mode === "unlocked") {
+      else if (value === "12357") {
+        await type("junkbot");
+      }
 
-        if (value === "68335") {
-
-          await type("ACCESSING FILE 68335...");
-          await wait(5500);
-
-          await type("Decrypting file...");
-          await wait(10000);
-
-          await type("Personnel Dossier 68335, Dr. ███████");
-          await wait(1500);
-
-          await type("WARNING: This file has been redacted from Level-3 to Level-1. Expect moderate redactations.");
-          await wait(2000);
-
-          await type("Dr. ███████, Research Director of Facility-220");
-          await wait(2000);
-
-          await type("Full Name: ██████ ███████");
-          await wait(2000);
-
-          await type("Height: 179cm | Weight: 82kg");
-          await wait(2000);
-        }
-
-        else if (value === "12357") {
-          await type("junkbot");
-        }
-
-        else if (value === "672") {
-          await type("[REDACTED]");
-        }
-
-        else {
-          await type("INVALID FILE ID");
-        }
+      else if (value === "672") {
+        await type("[REDACTED]");
       }
 
       else {
-        await type("INVALID COMMAND");
+        await type("INVALID FILE ID");
       }
+
+      return;
     }
+
+    await type("INVALID COMMAND");
   });
 
 };
