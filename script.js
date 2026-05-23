@@ -95,12 +95,16 @@ window.onload = function () {
         await type("Personnel Dossier 68335, Dr. ███████");
         await wait(1500);
 
-        await type("WARNING: This file has been redacted");
-
+        await type("WARNING: This file has been redacted from Level 3 to Level 1.");
+        await wait(3500);
+        
+        await type("Expect moderate redacations.");
+        await wait(1500);
+        
         await type("Dr. ███████, Research Director of Facility-220");
-        await wait(2000);
+        await wait(3000);
 
-        await type("Full Name: ██████ ███████");
+        await type("I. PERSONNEL INFORMATION");
         await wait(2000);
 
         await type("Height: 179cm | Weight: 82kg");
