@@ -4,7 +4,8 @@ window.onload = function () {
   const output = document.getElementById("output");
 
   input.disabled = true;
-  input.style.display = "none";
+
+  document.querySelector(".input-line").style.visibility = "hidden";
 
   const SECRET = "load personnel database";
 
@@ -23,6 +24,7 @@ window.onload = function () {
       let i = 0;
 
       const interval = setInterval(() => {
+
         line.textContent += text[i];
         i++;
 
@@ -37,23 +39,25 @@ window.onload = function () {
   }
 
   function print(text) {
+
     const line = document.createElement("div");
     line.textContent = text;
     output.appendChild(line);
+
   }
 
   async function activatePrompt() {
 
-    const prompt = document.querySelector(".input-line span");
+    const line = document.querySelector(".input-line");
 
-    input.style.display = "block";
+    line.style.visibility = "visible";
 
     for (let i = 0; i < 6; i++) {
 
-      prompt.style.visibility = "hidden";
+      line.style.opacity = "0";
       await wait(120);
 
-      prompt.style.visibility = "visible";
+      line.style.opacity = "1";
       await wait(120);
     }
 
@@ -112,7 +116,7 @@ window.onload = function () {
           await wait(1500);
 
           await type("WARNING: This file has been redacted from Level-3 to Level-1. Expect moderate redactations.");
-          await wait(2000);
+          await wait(3000);
 
           await type("Dr. ███████, Research Director of Facility-220");
           await wait(2000);
@@ -122,23 +126,32 @@ window.onload = function () {
 
           await type("Height: 179cm | Weight: 82kg");
           await wait(2000);
+
         }
 
         else if (value === "12357") {
+
           await type("junkbot");
+
         }
 
         else if (value === "672") {
+
           await type("[REDACTED]");
+
         }
 
         else {
+
           await type("INVALID FILE ID");
+
         }
       }
 
       else {
+
         await type("INVALID COMMAND");
+
       }
 
       input.value = "";
