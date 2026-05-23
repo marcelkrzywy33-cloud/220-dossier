@@ -87,16 +87,24 @@ window.onload = function () {
       if (value === "68335") {
 
         await type("ACCESSING FILE 68335...");
-        await wait(1500);
+        await wait(5500);
 
         await type("Decrypting file...");
-        await wait(2000);
+        await wait(10000);
 
         await type("Personnel Dossier 68335, Dr. ███████");
         await wait(1500);
 
-        await type("WARNING: REDACTED FILE");
+        await type("WARNING: This file has been redacted");
 
+        await type("Dr. ███████, Research Director of Facility-220");
+        await wait(2000);
+
+        await type("Full Name: ██████ ███████");
+        await wait(2000);
+
+        await type("Height: 179cm | Weight: 82kg");
+        await wait(2000);
       }
 
       else if (value === "12357") {
