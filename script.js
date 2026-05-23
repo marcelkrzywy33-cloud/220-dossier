@@ -65,6 +65,8 @@ window.onload = function () {
 
       print("> " + value);
 
+      input.value = "";
+
       if (mode === "high command" && value === SECRET) {
 
         await type("COMMAND PROCESSING");
@@ -120,8 +122,6 @@ window.onload = function () {
       else {
         await type("INVALID COMMAND");
       }
-
-      input.value = "";
     }
   });
 
